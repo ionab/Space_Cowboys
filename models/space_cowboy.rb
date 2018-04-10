@@ -77,6 +77,8 @@ attr_accessor :name, :homeworld, :bounty_value, :last_known_location
     cowboy = db.exec_prepared("id")
     db.close()
     @id = cowboy[0]["id"].to_i
+    # return Bounty.new(cowboy).to_i commented out as attempt to use without
+    #using .map to get the integer. To review with Upul in morning.
     return cowboy.map {|cowboy| Bounty.new(cowboy)}
   end
 end

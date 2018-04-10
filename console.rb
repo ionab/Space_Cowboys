@@ -5,9 +5,9 @@ Bounty.delete_all
 
 bounty1 = Bounty.new({
   "name" => "Han Solo",
-  "homeworld" => "earth",
-  "bounty_value" => 4,
-  "last_known_location" =>"Edinburgh"
+  "homeworld" => "Corellia",
+  "bounty_value" => 224190,
+  "last_known_location" =>"Star Killer Base"
   })
 
 bounty1.save()
