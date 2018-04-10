@@ -60,5 +60,27 @@ attr_accessor :name, :homeworld, :bounty_value, :last_known_location
     db.close()
   end
 
+  def self.find_by_name(name)
+    db = PG.connect({dbname: "space_cowboy", host: "localhost"})
+    sql = "SELECT * FROM bounties WHERE name = '#{name}'"
+    db.prepare("name", sql)
+    cowboy = db.exec_prepared("name")
+    db.close()
+    @id = cowboy[0]["id"].to_i
+    return cowboy.map {|cowboy| Bounty.new(cowboy)}
+  end
 
+  def self.find_by_id(id)
+    db = PG.connect({dbname: "space_cowboy", host: "localhost"})
+    sql = "SELECT * FROM bounties WHERE id = #{id}"
+    db.prepare("id", sql)
+    cowboy = db.exec_prepared("id")
+    db.close()
+    @id = cowboy[0]["id"].to_i
+    return cowboy.map {|cowboy| Bounty.new(cowboy)}
+  end
+
+# #   Implement a second self.find method
+# that returns one instance of your class when an id
+#  is passed in.
 end
