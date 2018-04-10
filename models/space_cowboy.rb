@@ -79,8 +79,4 @@ attr_accessor :name, :homeworld, :bounty_value, :last_known_location
     @id = cowboy[0]["id"].to_i
     return cowboy.map {|cowboy| Bounty.new(cowboy)}
   end
-
-# #   Implement a second self.find method
-# that returns one instance of your class when an id
-#  is passed in.
 end
