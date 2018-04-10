@@ -33,6 +33,16 @@ attr_accessor :name, :homeworld, :bounty_value, :last_known_location
     db.close()
   end
 
+  def update()
+    db = PG.connect({dbname: "space_cowboy", :host "localhost"})
+    sql = "INSERT bounties SET (name, homeworld, bounty_value, last_known_location) =
+    ($1, $2, $3, $4) WHERE id = $5;"
+    values = [@name, @homeworld, @bounty_value, @last_known_location]
+    db.prepare("update", sql)
+    db.exec_prepared("update", values)
+    db.close()
+  end
+
   def self.all()
     db = PG.connect({dbname: "space_cowboy", host: "localhost"})
     sql= "SELECT * FROM bounties;"
