@@ -1,6 +1,7 @@
 require("pry-byebug")
 require_relative("./models/space_cowboy.rb")
 
+Bounty.delete_all
 
 bounty1 = Bounty.new({
   "name" => "Han Solo",

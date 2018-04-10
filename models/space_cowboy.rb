@@ -24,6 +24,15 @@ attr_accessor :name, :homeworld, :bounty_value, :last_known_location
     @id = result[0]["id"].to_i
   end
 
+  def delete()
+    db = PG.connect({dbname: "space_cowboy", host: "localhost"})
+    sql = "DELETE FROM bounties WHERE ID = $1"
+    values = [@id]
+    db.prepare("delete", sql)
+    db.exec_prepared("delete", values)
+    db.close()
+  end
+
   def self.all()
     db = PG.connect({dbname: "space_cowboy", host: "localhost"})
     sql= "SELECT * FROM bounties;"
@@ -31,6 +40,14 @@ attr_accessor :name, :homeworld, :bounty_value, :last_known_location
     cowboy = db.exec_prepared("all")
     db.close()
     return cowboy.map {|cowboy| Bounty.new(cowboy)}
+  end
+
+  def self.delete_all()
+    db = PG.connect({dbname: "space_cowboy", host: "localhost"})
+    sql = "DELETE FROM bounties"
+    db.prepare("delete_all", sql)
+    db.exec_prepared("delete_all")
+    db.close()
   end
 
 
