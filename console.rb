@@ -1,9 +1,9 @@
 require("pry-byebug")
-require_relative("./models/space_cowboy.rb")
+require_relative("./models/space_cowboy.rb") #./just means stay in your current directory.
 
 Bounty.delete_all
 
-bounty1 = Bounty.new({
+bounty1 = Bounty.new({ #setting up a new instance of your bounty class.
   "name" => "Han Solo",
   "homeworld" => "Corellia",
   "bounty_value" => 224190,
@@ -12,7 +12,7 @@ bounty1 = Bounty.new({
 
 bounty1.save()
 
-bounty2 = Bounty.new({
+bounty2 = Bounty.new({ #another new instance
   "name" => "Captain Mal",
   "homeworld" => "mars",
   "bounty_value" => 3,
